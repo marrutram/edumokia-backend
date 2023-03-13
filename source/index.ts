@@ -19,15 +19,17 @@ router.use((req, res, next) => {
     next();
 });
 
+//router.get('/', (req, res) => res.send('Namaste 🙏));
+
 router.use('/default/edumokia-backend', routes);
 
-/*
 router.use((req, res, next) => {
     const error = new Error('not found');
     return res.status(404).json({
         message: error.message
     });
 });
-*/
+
+console.log(process.env.ENVIRONMENT)
 
 exports.handler = serverless(router);
