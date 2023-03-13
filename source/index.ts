@@ -19,7 +19,7 @@ router.use((req, res, next) => {
     next();
 });
 
-router.get('`/${process.env.ENVIRONMENT}/edumokia-backend/health`', (req, res) => res.send('Check Edumokia Backend'));
+router.get(`/${process.env.ENVIRONMENT}/edumokia-backend/health`, (req, res) => res.send('Check Edumokia Backend'));
 router.use(`/${process.env.ENVIRONMENT}/edumokia-backend`, routes);
 
 router.use((req, res, next) => {
