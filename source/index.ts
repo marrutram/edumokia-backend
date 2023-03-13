@@ -19,7 +19,7 @@ router.use((req, res, next) => {
     next();
 });
 
-router.get('/', (req, res) => res.send('Namaste 🙏'));
+router.get('/default/edumokia-backend', (req, res) => res.send('Namaste 🙏'));
 /*
 router.use('/', routes);
 
