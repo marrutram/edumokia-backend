@@ -19,7 +19,7 @@ router.use((req, res, next) => {
     next();
 });
 
-router.use('/default/edumokia-backend/', routes);
+router.use('/', routes);
 
 router.use((req, res, next) => {
     const error = new Error('not found');
