@@ -19,6 +19,8 @@ router.use((req, res, next) => {
     next();
 });
 
+router.get('/', (req, res) => res.send('Namaste 🙏'));
+/*
 router.use('/', routes);
 
 router.use((req, res, next) => {
@@ -27,6 +29,8 @@ router.use((req, res, next) => {
         message: error.message
     });
 });
+*/
+
 
 if (process.env.ENVIRONMENT === 'production') {
     exports.handler = serverless(router);
