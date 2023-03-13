@@ -19,9 +19,8 @@ router.use((req, res, next) => {
     next();
 });
 
-//router.get('/', (req, res) => res.send('Namaste 🙏));
-
-router.use('/default/edumokia-backend', routes);
+router.get('`/${process.env.ENVIRONMENT}/edumokia-backend/health`', (req, res) => res.send('Check Edumokia Backend'));
+router.use(`/${process.env.ENVIRONMENT}/edumokia-backend`, routes);
 
 router.use((req, res, next) => {
     const error = new Error('not found');
@@ -30,6 +29,12 @@ router.use((req, res, next) => {
     });
 });
 
-console.log(process.env.ENVIRONMENT)
 
-exports.handler = serverless(router);
+if (process.env.ENVIRONMENT === 'production') {
+    exports.handler = serverless(router);
+} else {
+    const PORT: any = process.env.PORT ?? 6060;
+    router.listen(PORT, () => {
+        console.log(`Server is listening on port ${PORT}.`);
+    });
+}
