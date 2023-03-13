@@ -31,12 +31,4 @@ router.use((req, res, next) => {
 });
 */
 
-
-if (process.env.ENVIRONMENT === 'production') {
-    exports.handler = serverless(router);
-} else {
-    const PORT: any = process.env.PORT ?? 6060;
-    router.listen(PORT, () => {
-        console.log(`Server is listening on port ${PORT}.`);
-    });
-}
+exports.handler = serverless(router);
