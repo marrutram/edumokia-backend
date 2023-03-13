@@ -19,8 +19,8 @@ router.use((req, res, next) => {
     next();
 });
 
-//router.get(`/production/edumokia-backend/health`, (req, res) => res.send(process.env.ENVIRONMENT));
-router.get(`/${process.env.ENVIRONMENT}/edumokia-backend/health`, (req, res) => res.send('Check Edumokia Backend'));
+router.get(`/production/edumokia-backend/health`, (req, res) => res.send(process.env.ENVIRONMENT));
+//router.get(`/${process.env.ENVIRONMENT}/edumokia-backend/health`, (req, res) => res.send('Check Edumokia Backend'));
 //router.use(`/${process.env.ENVIRONMENT}/edumokia-backend`, routes);
 
 router.use((req, res, next) => {
@@ -30,7 +30,8 @@ router.use((req, res, next) => {
     });
 });
 
-
+exports.handler = serverless(router);
+/*
 if (process.env.ENVIRONMENT === 'production') {
     exports.handler = serverless(router);
 } else {
@@ -39,3 +40,4 @@ if (process.env.ENVIRONMENT === 'production') {
         console.log(`Server is listening on port ${PORT}.`);
     });
 }
+*/
