@@ -2,6 +2,10 @@ const serverless = require('serverless-http');
 import express, { Express } from 'express';
 import morgan from 'morgan';
 import routes from './routes/posts';
+import path from 'path';
+import dotenv from 'dotenv';
+const envPath = path.resolve(__dirname, '..', '.env');
+dotenv.config({ path: envPath });
 
 const router: Express = express();
 
@@ -19,7 +23,8 @@ router.use((req, res, next) => {
     next();
 });
 
-router.use(`/${process.env.ENVIRONMENT}`, routes);
+const isProd = process.env.ENVIRONMENT === 'production';
+router.use(`/edumokia-backend${!isProd?'/'+process.env.ENVIRONMENT:''}`, routes);
 
 router.use((req, res, next) => {
     const error = new Error('not found');
@@ -28,7 +33,7 @@ router.use((req, res, next) => {
     });
 });
 
-if (process.env.ENVIRONMENT === 'production') {
+if (isProd) {
     exports.handler = serverless(router);
 } else {
     const PORT: any = process.env.PORT ?? 6060;
